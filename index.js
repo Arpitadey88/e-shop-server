@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 // user : ecommerceShop
 // password : RQ06h0CskTgcSJgD
 
@@ -47,7 +47,7 @@ async function run() {
     // GET Single Product from all product
     app.get('/products/:id', async (req, res) => {
       const id = req.params.id;
-      console.log('getiing id');
+      // console.log('getiing id');
       const query = { _id: ObjectId(id) };
       const product = await productsCollection.findOne(query);
       res.json(product);
