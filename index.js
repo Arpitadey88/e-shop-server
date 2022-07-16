@@ -25,6 +25,7 @@ async function run() {
     const productsCollection = database.collection('products');
     const ordersCollection = database.collection("orders");
     const usersCollection = database.collection('users');
+    const reviewCollection = database.collection('reviews');
 
     // POST/Insert Product to Database from json
     app.post('/addProducts', async (req, res) => {
@@ -146,6 +147,23 @@ async function run() {
       }
       res.json({ admin: isAdmin });
     })
+
+     // Post Review API
+     app.post('/reviews', async (req, res) => {
+      const review = req.body;
+      console.log('hit the post api', review);
+
+      const result = await reviewCollection.insertOne(review);
+      console.log(result);
+      res.json(result);
+  });
+
+  // GET REVIEW API
+  app.get('/reviews', async (req, res) => {
+      const cursor = reviewCollection.find({});
+      const review = await cursor.toArray();
+      res.send(review);
+  })
 
   }
   finally {
