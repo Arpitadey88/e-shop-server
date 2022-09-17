@@ -30,8 +30,7 @@ async function run() {
     // POST/Insert Product to Database from json
     app.post('/addProducts', async (req, res) => {
       const product = req.body;
-      console.log('hit the post api', product);
-
+      // console.log('hit the post api', product);
       const result = await productsCollection.insertOne(product);
       console.log(result);
       res.json(result);
@@ -109,14 +108,14 @@ async function run() {
       res.json(result);
     });
 
-    // Add Save Users
+    // Add Save Users *
     app.post('/users', async (req, res) => {
       const user = req.body;
       const result = await usersCollection.insertOne(user);
       res.json(result);
     });
 
-    // Make Users
+    // Make Users *
     app.put('/users', async (req, res) => {
       const user = req.body;
       const filter = { email: user.email };
@@ -126,7 +125,7 @@ async function run() {
       res.json(result);
     });
 
-    // Make Admin
+    // Make Admin *
     app.put('/users/admin', async (req, res) => {
       const user = req.body;
       console.log('put', user);
@@ -136,7 +135,7 @@ async function run() {
       res.json(result);
     })
 
-    // Check Admin or Not
+    // Check Admin or Not *
     app.get('/users/:email', async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
